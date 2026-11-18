@@ -1,0 +1,41 @@
+#!/bin/bash
+
+is_in_git_repo() {
+  git rev-parse HEAD >/dev/null 2>&1 && return 0 || echo "This is not a repository." && return 1
+}
+
+gdif() {
+  is_in_git_repo
+  local is_repo=$?
+  if [ $is_repo -eq 1 ]; then
+    return 1
+  fi
+
+  untracked=$(git ls-files --others --exclude-standard)
+  tracked=$(git diff --name-only)
+
+  if [ ${#untracked[@]} -eq 0 ] && [ ${#tracked[@]} -eq 0 ]; then
+    echo "No modifications found." && return 1
+  elif [ ${#untracked[@]} -eq 0 ]; then
+    all=$tracked
+  elif [ ${#tracked[@]} -eq 0 ]; then
+    all=$untracked
+  else
+    all=("${untracked[@]}" "${tracked[@]}")
+  fi
+
+  preview="echo ${untracked[*]} | grep -cq {} && git diff --no-index /dev/null --color=always {} || git diff --color=always {}"
+  printf "%s\n" "${all[@]}" |
+    fzf \
+      -m \
+      --ansi \
+      --preview "$preview" \
+      --disabled \
+      --bind 'enter:become(return 0),ctrl-c:become(return 0),ctrl-q:become(return 0),esc:become(return 0)'
+}
+
+gch() {
+  is_in_git_repo &&
+    git checkout "$(git branch --all | fzf | tr -d "*,[:space:]" | sed 's/remotes\/origin\///')" ||
+    echo "This is not a repository." && return 1
+}

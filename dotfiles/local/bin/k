@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# k: interactively pick a running process with fzf and force-kill it (SIGKILL)
+#
+# 1. ps:   Feed the list of processes to fzf
+# 2. fzf:  Interactively select a process using fuzzy matching algorithm
+# 3. awk:  Take the PID from the selected line
+# 4. kill: Kill the process with the PID
+(
+  date
+  ps -ef
+) |
+  fzf --bind='ctrl-r:reload(date; ps -ef)' \
+    --header=$'Press CTRL-R to reload\n\n' \
+    --header-lines=2 \
+    --preview='echo {}' \
+    --preview-window=down,3,wrap |
+  awk '{print $2}' |
+  xargs kill -9

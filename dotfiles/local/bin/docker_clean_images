@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Remove all local Docker images except those matching the keep-list in the grep pattern below
+
+docker images -a |
+  tail -n +2 |
+  grep -v -E '.*(aws-cli|postgis|postgres|backend|homelab|shellcheck|bdl|mockserver|localstack|mcr.microsoft.com)' |
+  awk '{ print $2 }' |
+  xargs -I '{}' docker rmi {}

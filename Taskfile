@@ -29,32 +29,32 @@ function task:create_symlinks() {
   # TODO: if the default file already exists, create a backup and then create the symlinks
 
   # aliases and functions
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/functions" "$HOME/.functions"
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/aliases" "$HOME/.aliases"
+  ln -snf "$(pwd)/dotfiles/functions" "$HOME/.functions"
+  ln -snf "$(pwd)/dotfiles/aliases" "$HOME/.aliases"
 
   # specific files
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/gitconfig" "$HOME/.gitconfig"
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/ssh/config" "$HOME/.ssh/config"
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/zshrc" "$HOME/.zshrc"
+  ln -snf "$(pwd)/dotfiles/gitconfig" "$HOME/.gitconfig"
+  ln -snf "$(pwd)/dotfiles/ssh/config" "$HOME/.ssh/config"
+  ln -snf "$(pwd)/dotfiles/zshrc" "$HOME/.zshrc"
 
   # hypr
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/config/hypr" "$HOME/.config/hypr"
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/config/waybar" "$HOME/.config/waybar"
+  ln -snf "$(pwd)/dotfiles/config/hypr" "$HOME/.config/hypr"
+  ln -snf "$(pwd)/dotfiles/config/waybar" "$HOME/.config/waybar"
 
   # bin
   mkdir -p "$HOME/.local/bin"
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/local/bin/k" "$HOME/.local/bin/k"
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/local/bin/docker_clean_images" "$HOME/.local/bin/dci"
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/local/bin/rfv" "$HOME/.local/bin/rfv"
+  ln -snf "$(pwd)/dotfiles/local/bin/k" "$HOME/.local/bin/k"
+  ln -snf "$(pwd)/dotfiles/local/bin/docker_clean_images" "$HOME/.local/bin/dci"
+  ln -snf "$(pwd)/dotfiles/local/bin/rfv" "$HOME/.local/bin/rfv"
 
   # tool versions
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/tool-versions" "$HOME/.tool-versions"
+  ln -snf "$(pwd)/dotfiles/tool-versions" "$HOME/.tool-versions"
 
   # kitty
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/config/kitty" "$HOME/.config/kitty"
+  ln -snf "$(pwd)/dotfiles/config/kitty" "$HOME/.config/kitty"
 
   # tmux
-  ln -snf "$HOME/workspaces/personal/dotfiles/dotfiles/.tmux.conf" "$HOME/.tmux.conf"
+  ln -snf "$(pwd)/dotfiles/.tmux.conf" "$HOME/.tmux.conf"
 }
 
 function task:install_minimun_packages() {

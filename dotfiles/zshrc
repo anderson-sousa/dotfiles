@@ -152,3 +152,4 @@ export FZF_DEFAULT_COMMAND='find . \! \( -type d -path ./.git -prune \) \! \( -p
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 
 export CLAUDE_CODE_ACCESSIBILITY=1
+
